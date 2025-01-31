@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Loading from './Loading';
 import ErrorBoundary from './ErrorBoundary.js';
 import 'github-markdown-css';
+
 const Wrapper = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -13,12 +14,14 @@ const Wrapper = styled.div`
     overflow-y: hidden;
   }
 `;
+
 const LazyPreview = lazy(() => import('./Preview.js'));
+
 export default ({ source, children }) => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<Loading duration={0.5} />}>
-        <Wrapper className="preview  markdown-body">
+        <Wrapper className="preview markdown-body">
           <LazyPreview source={source}>{children}</LazyPreview>
         </Wrapper>
       </Suspense>
